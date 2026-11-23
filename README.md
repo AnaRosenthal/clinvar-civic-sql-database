@@ -55,3 +55,14 @@ Build the CIViC database:
 The queries in the `querys/` folders can then be run on the resulting databases, for example:
 
     sqlite3 civic.db < civic/querys/1.query_civic.sql
+
+## Additional ClinVar loaders
+
+Load the ClinVar gene-level statistics into the ClinVar database:
+
+    python3 clinvar/scripts/clinvar_stats.py clinvar.db gene_specific_summary_2025-12.txt.gz
+
+Load the ClinVar article citations into the ClinVar database (this loader expects a gzip-compressed file, so compress `var_citations.txt` first):
+
+    gzip -k var_citations.txt
+    python3 clinvar/scripts/clinvar_articles.py clinvar.db var_citations.txt.gz
